@@ -29,6 +29,7 @@ app.post("/v1/auth", auth)
 
 function auth(request, response) {
     response.json( {
-      "token": "mocktoken"  
+      "access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkthcmwgQWRyaWFubyIsImlhdCI6MTUxNjIzOTAyMn0.STyNSCjMt9cKNL6YVfLRTBabPbzbW1FDRebDqTwC2-c",
+      "expires": "2022-02-11T23:59:59.999-08:00"
     } )
 }
