@@ -6,7 +6,7 @@ var app = express();
 app.listen(3000)
 console.log("Node.js Express server is running on port 3000...")
 
-app.use(function (req, res, next) {
+app.use(express.json(), function (req, res, next) {
   // Website you wish to allow to connect
   const allowedOrigins = ["https://editor.swagger.io", "https://hoppscotch.io"];
   const origin = req.headers.origin;
@@ -14,7 +14,7 @@ app.use(function (req, res, next) {
   if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
-      
+
   // Request methods you wish to allow eg: GET, POST, OPTIONS, PUT, PATCH, DELETE
   res.setHeader("Access-Control-Allow-Methods", "GET, POST");
   
@@ -102,8 +102,14 @@ function greet(req, res) {
 app.post("/v1/auth", auth);
 
 function auth(req, res) {
+  const {username, password} = req.body;
+  if (username == "karl" && password == "adriano") {
     res.json( {
-      "access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkthcmwgQWRyaWFubyIsImlhdCI6MTUxNjIzOTAyMn0.STyNSCjMt9cKNL6YVfLRTBabPbzbW1FDRebDqTwC2-c",
+      "accesstoken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkthcmwgQWRyaWFubyIsImlhdCI6MTUxNjIzOTAyMn0.STyNSCjMt9cKNL6YVfLRTBabPbzbW1FDRebDqTwC2-c",
       "expires": "2022-02-11T23:59:59.999-08:00"
     } )
+  }
+  else {
+    res.sendStatus(401)
+  }
 }
